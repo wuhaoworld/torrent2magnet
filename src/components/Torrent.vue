@@ -105,6 +105,7 @@ export default {
   methods: {
     startSelectFiles: function(){
         window.document.getElementById('file').click();
+        _hmt.push(['_trackEvent', 'selectFile', 'start']);
     },
     selectFile: function(evt){
        var file = evt.target.files[0];
@@ -116,8 +117,10 @@ export default {
            .then((response) => {
              this.button_status = 'ready';
              this.torrentInfo = response.data;
+             _hmt.push(['_trackEvent', 'selectFile', 'done']);
            }).catch(err => {
                this.button_status = 'ready';
+               _hmt.push(['_trackEvent', 'selectFile', 'error']);
                $.notify({
                	message: '出错啦，请稍后重试'
                },{
