@@ -15,7 +15,7 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://jinshuju.net/f/QxksqT">意见反馈</a></li>
+            <li><a target="_blank" href="https://jinshuju.net/f/QxksqT">意见反馈</a></li>
           </ul>
         </div>
       </div>

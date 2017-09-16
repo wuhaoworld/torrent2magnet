@@ -2,8 +2,9 @@
 <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <input type="file" id="file" v-on:change="selectFile" name="files" accept="application/x-bittorrent" style="display:none;">
-        <button type="button" v-on:click="startSelectFiles" class="btn btn-primary">选择种子文件</button>
+        <input type="file" id="file" v-on:change="selectFile" name="files" accept="application/x-bittorrent,application/octet-stream" style="display:none;">
+        <button v-if="button_status == 'ready'" type="button" v-on:click="startSelectFiles" class="btn btn-primary upload-btn">选择种子文件</button>
+        <button v-else type="button" disabled class="btn btn-primary upload-btn">上传中...</button>
       </div>
     </div>
     <div v-if="torrentInfo" class="row">
@@ -66,7 +67,8 @@ import axios from 'axios';
 export default {
   data(){
     return {
-        torrentInfo: null
+        torrentInfo: null,
+        button_status: 'ready'
     }
   },
   mounted:function(){
@@ -105,30 +107,38 @@ export default {
         window.document.getElementById('file').click();
     },
     selectFile: function(evt){
-        var file = evt.target.files[0];
-        var formData = new FormData();
-        formData.append("file", file);
-        axios.post('https://torrent-vvv123.rhcloud.com/', formData)
-        .then((response) => {
-          console.log(response.data);
-          this.torrentInfo = response.data;
-        }).catch(err => {
-            $.notify({
-            	message: '出错啦，请稍后重试'
-            },{
-            	type: 'danger',
-                delay: 1000,
-                allow_dismiss: false,
-                animate: {
-            		enter: 'animated fadeInDown',
-            		exit: 'animated fadeOutUp'
-            	},
-                z_index: 9999,
-                placement: {
-        			align: 'center'
-        		}
-            });
-        })
+       var file = evt.target.files[0];
+       if (file.type.match('application/x-bittorrent') || file.type.match('application/octet-stream')) {
+           var formData = new FormData();
+           formData.append("file", file);
+           this.button_status = 'pending';
+           axios.post('https://torrent-vvv123.rhcloud.com/', formData)
+           .then((response) => {
+             this.button_status = 'ready';
+             this.torrentInfo = response.data;
+           }).catch(err => {
+               this.button_status = 'ready';
+               $.notify({
+               	message: '出错啦，请稍后重试'
+               },{
+               	type: 'danger',
+                   delay: 1000,
+                   allow_dismiss: false,
+                   animate: {
+               		enter: 'animated fadeInDown',
+               		exit: 'animated fadeOutUp'
+               	},
+                   z_index: 9999,
+                   placement: {
+                       align: 'center'
+                   }
+               });
+           });
+       }else{
+           alert('请选择种子文件');
+           $('#file').val('');
+           return;
+       }
     }
   }
 
@@ -149,5 +159,8 @@ export default {
 }
 .container{
     margin-bottom: 30px;
+}
+.upload-btn{
+    width: 110px;
 }
 </style>
