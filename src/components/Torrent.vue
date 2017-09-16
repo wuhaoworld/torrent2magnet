@@ -106,21 +106,29 @@ export default {
     },
     selectFile: function(evt){
         var file = evt.target.files[0];
-        if (!file.type.match('application/x-bittorrent')) {
-          alert('请选择种子文件');
-          $('#file').val('');
-          return;
-        }
         var formData = new FormData();
         formData.append("file", file);
         axios.post('https://torrent-vvv123.rhcloud.com/', formData)
         .then((response) => {
           console.log(response.data);
           this.torrentInfo = response.data;
-        }).catch(err => {})
-    },
-    copy: function(){
-
+        }).catch(err => {
+            $.notify({
+            	message: '出错啦，请稍后重试'
+            },{
+            	type: 'danger',
+                delay: 1000,
+                allow_dismiss: false,
+                animate: {
+            		enter: 'animated fadeInDown',
+            		exit: 'animated fadeOutUp'
+            	},
+                z_index: 9999,
+                placement: {
+        			align: 'center'
+        		}
+            });
+        })
     }
   }
 
