@@ -2,7 +2,7 @@
 require 'BEncode.php';
 
 $bcoder = new Bhutanio\BEncode\BEncode;
-header("Access-Control-Allow-Origin: http://127.0.0.1:3000");
+header("Access-Control-Allow-Origin: https://wuhaoworld.github.io");
 
 if(!isset($_FILES["file"])){
 	die('please select a torrent file');
@@ -35,13 +35,22 @@ function getTorrentInfo($path){
 	$result['comment'] = $torrent['comment'];
 	$result['publisher'] = $torrent['info']['publisher'];
 	$result['created-by'] = $torrent['created by'];
-	$result['created-at'] = $torrent['creation date'];
+	$result['created-at'] = date("Y-m-d H:i:s", $torrent['creation date']);
 	$result['announce'] = $torrent['announce'];
 	$result['announce-list'] = [];
 	foreach ($torrent['announce-list'] as $value) {
 		array_push($result['announce-list'], $value[0]);
 	}
-
+	$announce_string = "";
+	if(count($result['announce-list'])> 10){
+	    $tmp_annouce = array_slice($result['announce-list'], 0 , 10);
+	}else{
+	    $tmp_annouce = $result['announce-list'];
+	}
+	foreach($tmp_annouce as $v){
+	    $announce_string .= "&tr=" . urlencode($v);
+	}
+	$result['magnet'] = "magnet:?xt=urn:btih:" . $result['infohash'] . "&dn=" . urlencode($result['name']) . $announce_string;
 	$result['files'] = $bcoder->filelist( $torrent );
 	return $result;
 }

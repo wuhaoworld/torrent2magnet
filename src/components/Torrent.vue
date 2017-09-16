@@ -113,7 +113,7 @@ export default {
         }
         var formData = new FormData();
         formData.append("file", file);
-        axios.post('http://ratwu.com/tools/torrent-parser/', formData)
+        axios.post('https://torrent-vvv123.rhcloud.com/', formData)
         .then((response) => {
           console.log(response.data);
           this.torrentInfo = response.data;
