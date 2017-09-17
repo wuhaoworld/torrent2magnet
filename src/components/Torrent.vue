@@ -64,6 +64,7 @@
 </template>
 <script>
 import axios from 'axios';
+import config from '../../config';
 export default {
   data(){
     return {
@@ -113,7 +114,8 @@ export default {
            var formData = new FormData();
            formData.append("file", file);
            this.button_status = 'pending';
-           axios.post('https://torrent-vvv123.rhcloud.com/', formData)
+        //    axios.post('https://torrent-vvv123.rhcloud.com/', formData)
+           axios.post(config.apiUrl, formData)
            .then((response) => {
              this.button_status = 'ready';
              this.torrentInfo = response.data;
