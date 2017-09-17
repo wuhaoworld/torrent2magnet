@@ -114,7 +114,6 @@ export default {
            var formData = new FormData();
            formData.append("file", file);
            this.button_status = 'pending';
-        //    axios.post('https://torrent-vvv123.rhcloud.com/', formData)
            axios.post(config.apiUrl, formData)
            .then((response) => {
              this.button_status = 'ready';
