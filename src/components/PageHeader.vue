@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:#fff" href="/index.html">种子转磁力链接</a>
+          <a class="navbar-brand" style="color:#fff" href="/index.html">磁力链接转种子</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
