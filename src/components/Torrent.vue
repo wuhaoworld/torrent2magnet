@@ -1,14 +1,15 @@
 <template>
-<div class="container">
+<div>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
+         <h3>种子转磁力链接</h3>
         <input type="file" id="file" v-on:change="selectFile" name="files" accept="application/x-bittorrent,application/octet-stream" style="display:none;">
         <button v-if="button_status == 'ready'" type="button" v-on:click="startSelectFiles" class="btn btn-primary upload-btn">选择种子文件</button>
         <button v-else type="button" disabled class="btn btn-primary upload-btn">上传中...</button>
       </div>
     </div>
     <div v-if="torrentInfo" class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
         <h3>磁力链接</h3>
         <div class="input-group">
           <input type="text" id="magnet" class="form-control" v-model="torrentInfo.magnet" />
@@ -56,7 +57,7 @@
         </div>
     </div>
     <div v-else class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <p class="help-msg">选择种子文件，这里将展示磁力链接和种子详细信息</p>
         </div>
     </div>
@@ -150,7 +151,7 @@ export default {
 </script>
 <style>
 .container{
-  margin-top:80px;
+  margin-top:70px;
 }
 .grey{
   color: #999;
@@ -166,5 +167,8 @@ export default {
 }
 .upload-btn{
     width: 110px;
+}
+h3{
+    margin-bottom:16px;
 }
 </style>
