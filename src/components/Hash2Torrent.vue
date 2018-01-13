@@ -97,7 +97,7 @@ export default {
                   this.status = 'done';
                   this.downloadUrl = response.data.download_url;
                   console.log(response.data);
-                  this.downloadUrl = "https://torrent-vvv123.rhcloud.com" + this.downloadUrl;
+                  this.downloadUrl = "http://url2bt.ratwu.com/url2bt/api/download.php?infohash=" + response.data.infohash;
                   _hmt.push(['_trackEvent', 'convert', 'success']);
               }else{
                   this.status = 'done';
