@@ -1,3 +1,3 @@
 export default {
-    apiUrl : "http://url2bt.ratwu.com/url2bt/"
+    apiUrl : "http://35.200.148.180/url2bt/"
 }

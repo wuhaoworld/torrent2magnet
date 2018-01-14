@@ -12,9 +12,9 @@
         <div class="col-md-12">
         <h3>磁力链接</h3>
         <div class="input-group">
-          <input type="text" id="magnet" class="form-control" v-model="torrentInfo.magnet" />
+          <input type="text" id="magnet-url" class="form-control" v-model="torrentInfo.magnet" />
           <span class="input-group-btn">
-            <button type="button" id="copy-magnet" data-clipboard-target="#magnet" class="btn btn-default copy-button" title="复制到剪贴板">复制</button>
+            <button type="button" id="copy-magnet" data-clipboard-target="#magnet-url" class="btn btn-default copy-button" title="复制到剪贴板">复制</button>
           </span>
         </div>
         <h3>种子详情</h3>

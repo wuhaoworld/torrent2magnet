@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row">
           <div class="col-md-6">
-              <Hash2Torrent></Hash2Torrent>
+              <Torrent></Torrent>
           </div>
           <div class="col-md-6">
-              <Torrent></Torrent>
+              <Hash2Torrent></Hash2Torrent>
           </div>
         </div>
     </div>
